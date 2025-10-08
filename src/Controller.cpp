@@ -19,7 +19,7 @@ void Controller::setup() {
     statsTimer.reset();
 }
 
-void Controller::loop() {
+void Controller::loop(bool show) {
     if (mode == STOP) {
         stage->fade();
     } else {
@@ -71,7 +71,9 @@ void Controller::loop() {
 
     brightness->loop();
     
-    FastLED.show();
+    if (show) {
+        FastLED.show();
+    }
 }
 
 void Controller::setStandbyTimer(unsigned long timeout) {

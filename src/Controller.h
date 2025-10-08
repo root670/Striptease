@@ -54,7 +54,7 @@ class Controller {
             State *state
         );
         void setup();
-        void loop();
+        void loop(bool show = true);
 
         void setStandbyTimer(unsigned long timeout);
         void clearStandbyTimer();
