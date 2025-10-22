@@ -2,7 +2,7 @@
 #define Controller_h
 
 #include <Arduino.h>
-#include <EEPROM.h>
+#include <vector>
 
 #include "audio/AudioSensor.h"
 #include "Brightness.h"
@@ -38,6 +38,7 @@ class Controller {
         Timer modeTimer = Timer(0, false);
         Timer standbyTimer = Timer(0, false);
         Timer statsTimer = Timer(0, true);
+        std::vector<uint8_t> fxSpeeds;
         void saveParam();
         void loadParam();
         void resetCycleTimer();

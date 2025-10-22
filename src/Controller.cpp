@@ -11,6 +11,7 @@ Controller::Controller(
 }
 
 void Controller::setup() {
+    fxSpeeds.resize(stage->getFxCount(), 50);
     setInput(line, false);
     brightness->init();
     pause();
@@ -348,13 +349,16 @@ void Controller::decreaseParam() {
 }
 
 void Controller::saveParam() {
-    uint8_t value = state->getFxSpeed();
-    EEPROM.update(fx + 1, value);
+    if (fx < fxSpeeds.size()) {
+        fxSpeeds[fx] = state->getFxSpeed();
+    }
 }
 
 void Controller::loadParam() {
-    uint8_t value = min(EEPROM.read(fx + 1), 100);
-    state->setFxSpeed(value ? value : 50);
+    if (fx < fxSpeeds.size()) {
+        uint8_t value = min(fxSpeeds[fx], 100);
+        state->setFxSpeed(value);
+    }
 }
             
 void Controller::selectFx(uint8_t fx) {
